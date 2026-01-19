@@ -1,0 +1,11 @@
+.git
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.tmp
+*.log
+results/visuals/all
+results/plots
+results/benchmarks

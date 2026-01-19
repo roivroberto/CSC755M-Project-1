@@ -1,0 +1,17 @@
+algorithm,gap_variant,n,dataset,trial,seed,time_ms,comparisons,swaps,writes
+insertion,,50,nearly_sorted,1,3626764237,0.0409,104,0,104
+insertion,,50,nearly_sorted,2,1806341205,0.034,100,0,100
+insertion,,50,nearly_sorted,3,2195908194,0.0198,60,0,60
+insertion,,50,nearly_sorted,4,2046968324,0.0291,94,0,94
+insertion,,50,nearly_sorted,5,3900315155,0.0189,62,0,62
+insertion,,50,nearly_sorted,6,2167613558,0.0274,90,0,90
+insertion,,50,nearly_sorted,7,1210484339,0.0184,62,0,62
+insertion,,50,nearly_sorted,8,3246154361,0.0247,82,0,82
+insertion,,100,nearly_sorted,1,3874773259,0.1784,448,0,448
+insertion,,100,nearly_sorted,2,1332073689,0.0859,282,0,282
+insertion,,100,nearly_sorted,3,3134603515,0.0924,304,0,304
+insertion,,100,nearly_sorted,4,2937688618,0.0736,244,0,244
+insertion,,100,nearly_sorted,5,432508404,0.0606,199,0,199
+insertion,,100,nearly_sorted,6,1864753826,0.0927,306,0,306
+insertion,,100,nearly_sorted,7,3921352636,0.1086,352,0,352
+insertion,,100,nearly_sorted,8,2048741382,0.1177,382,0,382
