@@ -123,6 +123,45 @@ This section is structured for synthesis into a single document. It summarizes w
 - **Plots**: `results/plots/time/`, `results/plots/metrics/`, `results/plots/shell/`.
 - **Visuals**: `results/visuals/highlights/` (key GIFs), `results/visuals/all/` (full set).
 
+### Results Summary (Key Tables)
+Average `time_ms` at n=1000, dataset = random (10 trials per algorithm; Shell averaged across 4 gaps, 40 trials):
+
+| Algorithm | Avg time_ms |
+|---|---|
+| shell (avg over gaps) | 5.1695 |
+| selection | 87.0224 |
+| insertion | 87.7293 |
+| bubble | 149.5781 |
+
+Average `time_ms` at n=1000, dataset = nearly_sorted (10 trials per algorithm; Shell averaged across 4 gaps, 40 trials):
+
+| Algorithm | Avg time_ms |
+|---|---|
+| shell (avg over gaps) | 3.7796 |
+| insertion | 6.6988 |
+| selection | 88.2358 |
+| bubble | 102.3349 |
+
+Shell gap variants at n=1000, dataset = random (10 trials per gap):
+
+| Gap Variant | Avg time_ms |
+|---|---|
+| tokuda | 5.0927 |
+| knuth | 5.0984 |
+| shell | 5.1734 |
+| hibbard | 5.3135 |
+
+### Selected Visuals and Plots
+Key visualization highlights:
+
+![Bubble Sort on random n=50](results/visuals/highlights/bubble_random_n50.gif)
+![Shell Sort (Knuth gap) snapshot](results/visuals/highlights/shell_knuth_snapshot.png)
+
+Key benchmark plots:
+
+![Time vs n (random dataset)](results/plots/time/time_ms_random_all_algos.png)
+![Time vs n (nearly sorted dataset)](results/plots/time/time_ms_nearly_sorted_all_algos.png)
+
 ### Findings / Discussion
 These findings summarize the observed trends in the current artifacts. See the plots and CSV/JSON outputs for exact values.
 - Shell Sort is consistently the fastest on larger random inputs, with gap choice impacting runtime (see `results/benchmarks/shell.json` and `results/plots/shell/`).
