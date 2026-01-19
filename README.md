@@ -98,6 +98,58 @@ algorithm, gap_variant, n, dataset, trial, seed, time_ms, comparisons, swaps, wr
 python3 -m pytest
 ```
 
+## Report (Implementation, Results, Findings)
+This section is structured for synthesis into a single document. It summarizes what was built, how results were produced, and the main findings, with references to the included artifacts under `results/`.
+
+### Implementation Summary
+- Algorithms: Bubble, Insertion, Selection, Shell (multiple gap sequences).
+- Instrumentation: comparisons, swaps, writes, and elapsed time (ms).
+- Event-driven visualization: algorithms emit events; the visualizer consumes events and renders live counters.
+- Deterministic datasets: reproducible data generation by seed.
+- CLI: `viz` for visualization, `bench` for benchmarking, `tests` for correctness.
+
+### Methodology (Benchmark + Visualization)
+- **Environment**: record OS, CPU, RAM, Python version, and whether Docker was used.
+- **Datasets**: `random`, `sorted`, `reversed`, `nearly_sorted`, `few_unique`.
+- **Sizes**: default benchmark sizes are 50, 100, 200, 500, 1000, 2000, 5000 (override with `--sizes`).
+- **Trials**: repeated runs per size/dataset (`--trials`), with deterministic seeds.
+- **Timing**: `time.perf_counter()` around algorithm execution in benchmark mode.
+- **Metrics**: comparisons, swaps, writes, elapsed time (ms).
+
+### Results Summary (Artifacts)
+- **Benchmark CSV**: `results/benchmarks/results.csv` (full sweep).
+- **Shell gap comparison**: `results/benchmarks/shell.json`.
+- **Insertion (nearly_sorted) focus**: `results/benchmarks/insertion.csv`.
+- **Plots**: `results/plots/time/`, `results/plots/metrics/`, `results/plots/shell/`.
+- **Visuals**: `results/visuals/highlights/` (key GIFs), `results/visuals/all/` (full set).
+
+### Findings / Discussion
+These findings summarize the observed trends in the current artifacts. See the plots and CSV/JSON outputs for exact values.
+- Shell Sort is consistently the fastest on larger random inputs, with gap choice impacting runtime (see `results/benchmarks/shell.json` and `results/plots/shell/`).
+- Insertion Sort excels on nearly sorted data, reflecting its near-linear best-case behavior (see `results/benchmarks/insertion.csv` and `results/plots/time/`).
+- Selection Sort has stable but high comparison counts across datasets because it always scans the remaining suffix (see `results/plots/metrics/`).
+- Bubble Sort is the slowest on random and reversed data due to quadratic swaps and comparisons.
+- For already sorted arrays, Bubble and Insertion show near-linear comparisons, while Selection remains quadratic.
+
+### Appendix: Repro Commands
+Benchmark sweep:
+```
+python3 main.py bench --algo all --sizes 50 100 200 500 1000 2000 5000 --trials 10 --out results/benchmarks/results.csv
+```
+Shell gap comparison:
+```
+python3 main.py bench --algo shell --gaps shell knuth hibbard tokuda --sizes 100 500 1000 --datasets random reversed --trials 10 --out results/benchmarks/shell.json
+```
+Insertion on nearly sorted data:
+```
+python3 main.py bench --algo insertion --sizes 100 500 1000 --datasets nearly_sorted --trials 10 --out results/benchmarks/insertion.csv
+```
+Visualizations and plots:
+```
+python3 scripts/generate_visuals.py
+python3 scripts/generate_plots.py
+```
+
 ## Instrumentation & Event Model
 Metrics are consistent across algorithms:
 - **comparisons**: increments on every key comparison
@@ -154,7 +206,7 @@ python3 scripts/generate_visuals.py
 python3 scripts/generate_plots.py
 ```
 
-## Observations
+## Observations (From Current Artifacts)
 - For the random dataset at n=1000 (averaged across trials), Shell Sort (shell gaps) is fastest (~5.17 ms), while Selection and Insertion are similar (~87 ms) and Bubble is slowest (~150 ms).
 - On nearly_sorted data at n=1000, Insertion Sort is dramatically faster (~6.7 ms) than Bubble/Selection and uses far fewer comparisons/writes, matching its best‑case behavior.
 - On sorted data at n=1000, Bubble and Insertion are near‑linear (~999 comparisons), while Selection still performs ~499,500 comparisons because it always scans the remaining suffix.
