@@ -128,7 +128,7 @@ Each event carries current counters (comparisons, swaps, writes), enabling live 
 
 ## Notes
 - Sorting logic is independent of visualization logic (event-driven).
-- Large benchmark outputs should stay in `results/` (ignored by git).
+- Large benchmark outputs should stay in `results/`.
 - Benchmark seeds are deterministically derived from the provided base seed (`--seed`).
 - Default benchmark sizes: 50, 100, 200, 500, 1000, 2000, 5000 (override with `--sizes`).
 
@@ -139,7 +139,7 @@ Outputs included for submission (include these even though `results/` is gitigno
 - `results/benchmarks/insertion.csv` (Insertion Sort on nearly_sorted dataset)
 - `results/visuals/highlights/bubble_random_n50.gif` (visualization GIF)
 - `results/visuals/highlights/shell_knuth_snapshot.png` (visualization snapshot)
-- `results/visuals/all/` (comprehensive GIF set organized by algorithm)
+- `results/visuals/all/` (comprehensive GIF set)
   - `results/visuals/all/bubble/`
   - `results/visuals/all/insertion/`
   - `results/visuals/all/selection/`
@@ -161,11 +161,11 @@ python3 scripts/generate_plots.py
 - On reversed data at n=1000, Bubble and Insertion hit worst‑case comparisons (~499,500) and much higher write counts, while Shell remains low (~4.13 ms).
 - Across the runs in `results/benchmarks/shell.json`, Knuth gaps show the lowest average time (~1.08 ms), followed by Hibbard (~1.16 ms), then Shell (~1.29 ms).
 
-## CLI Reference (Quick)
+## CLI Reference
 - `viz`: `--algo`, `--n`, `--seed`, `--dataset`, `--gap`, `--speed`
 - `bench`: `--algo`, `--sizes`, `--datasets`, `--trials`, `--seed`, `--gaps`, `--out`
 
-## Results Layout (Submission-Friendly)
+## Results Layout
 ```
 results/
   README.md
